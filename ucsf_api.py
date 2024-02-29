@@ -16,7 +16,6 @@ class IndustryDocsSearch:
     
     # construct single query request
     def create_query(self):
-            
         return f'{self.base_url}query?q={self.q}&wt={self.wt}&cursorMark={self.cursorMark}&sort={self.sort}'
     
     # loop through results using cursorMark
@@ -46,12 +45,12 @@ class IndustryDocsSearch:
     def save_json(self):
         results_json = {'results': self.results}
         
-        with open(f'./{self.q}_results.json', 'w') as f:
+        with open(f'./{self.q}_results.json', 'w', encoding='utf-8') as f:
             f.write(json.dumps(results_json))
     
     # saves results as a CSV file
     def save_csv(self):
-        with open(f'./{self.q}_results.csv', 'w') as f:
+        with open(f'./{self.q}_results.csv', 'w', encoding='utf-8') as f:
             f.write(','.join(self.results[0].keys()))
             f.write('\n')
             for r in self.results:
