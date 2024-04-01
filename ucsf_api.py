@@ -2,8 +2,7 @@ import requests
 import json
 import re
 import csv
-import os
-import pandas as pd
+
 
 # UCSF Industry Documents Library Solar API: https://www.industrydocuments.ucsf.edu/wp-content/uploads/2020/08/IndustryDocumentsDataAPI_v7.pdf
 
