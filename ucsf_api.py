@@ -60,3 +60,5 @@ class IndustryDocsSearch:
                 f.write('\n')
                 
     # TO-DO save results as a XML file
+    def test(self):
+        return
