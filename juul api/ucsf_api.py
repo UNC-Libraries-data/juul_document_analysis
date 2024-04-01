@@ -2,26 +2,22 @@ import os
 import re
 import csv
 import json
-import requests
-import tempfile
-import pandas as pd
 import urllib
+import requests
+import pandas as pd
 
 # UCSF Industry Documents Library Solar API: https://www.industrydocuments.ucsf.edu/wp-content/uploads/2020/08/IndustryDocumentsDataAPI_v7.pdf
 
 
 ### TO DO ###
 # 1. Save results as a XML file
-# 2. Read the attached OCR of the files that are being pulled
-# 3. Fix save_csv method -- partially done: successfully converts dict objects to csv
-# 4. add parameter in query for cursormark
-# 5. add method to save cursormark as txt file
+# 2. Fix save_csv method -- partially done: successfully converts dict objects to csv
 
 class IndustryDocsSearch:
     def __init__(self):
          self.base_url = "https://metadata.idl.ucsf.edu/solr/ltdl3/"
          self.q = ""
-         self.wt = "xml"
+         self.wt = "json"
          self.cursorMark = "*"
          self.sort = "id%20asc"
          self.results = []
@@ -30,23 +26,6 @@ class IndustryDocsSearch:
     # construct single query request
     def create_query(self):
         return f'{self.base_url}query?q={self.q}&wt={self.wt}&cursorMark={self.cursorMark}&sort={self.sort}'
-    
-    # # loop through results using cursorMark
-    # def loop_results(self):
-    #     q_url = self.create_query()
-    #     r = requests.get(q_url).json()
-        
-    #     # add response to response list
-    #     self.results.extend(r['response']['docs'])
-        
-    #     # check to see if cursor marks match to make another request or not
-    #     if r['nextCursorMark'] == self.cursorMark:
-    #         print('Results are done!')
-    #         return
-    #     else:
-    #         # set next cursor mark
-    #         self.cursorMark = r['nextCursorMark']
-    #         self.loop_results()
     
     # loop through results using cursorMark
     def loop_results(self):
@@ -58,10 +37,8 @@ class IndustryDocsSearch:
             if len(self.results) == 0:
                 print(r['response']['numFound'])
 
-            # print(len(r['response']['docs']))
             # add response to response list
             self.results.extend(r['response']['docs'])
-            print(len(self.results))
             # check to see if cursor marks match to make another request or not
             if r['nextCursorMark'] == self.cursorMark:
                 print('Results are done!')
@@ -73,10 +50,16 @@ class IndustryDocsSearch:
         return
     
     # starts the query process
-    def query(self, q=None, wt='xml'):
+    def query(self, q=None, wt='json', cm='*'):
         self.q = q
         self.wt = wt.lower()
+        self.cursorMark = cm
+        print('Pulling query results')
         self.loop_results()
+        print('Adding URLs to query results')
+        self.create_links()
+        print('Pulling OCR content from query results')
+        self.obtain_ocr_content()
 
     # Read in results -- currently only reads in CSV or JSON
     def read(self, file):
@@ -123,40 +106,34 @@ class IndustryDocsSearch:
     def as_datatable(self):
         if pd.isnull(self.results):
             raise ValueError("Please run a query. No data available to create a datatable.")
-        
         if self.wt == 'json':
-            return pd.DataFrame.from_dict(self.results, orient='records')
-        
+            return pd.DataFrame(self.results)
         elif self.wt == 'csv':
             return pd.read_csv(self.results, encoding='utf-8')
     
+    # save cursorMark to local textfile to be used to continue on a previous query
     def save_cursormark(self):
         with open('last_cursormark.txt', 'rw') as f:
             f.write(self.cursorMark)
     
-    def ocr_url(self, doc_id):
+    # adds link to items 
+    def create_links(self):
+        for doc in self.results:
+            doc['url'] = f'https://www.industrydocuments.ucsf.edu/tobacco/docs/#id={doc['id']}'
+    
+    # pull ocr content from document id
+    def ocr_content(self, doc_id):
         # EXAMPLE URL: https://download.industrydocuments.ucsf.edu/m/x/h/p/mxhp0288/mxhp0288.ocr
         base_url = 'https://download.industrydocuments.ucsf.edu/'
-        folders = re.search(r'[a-z]+', doc_id)[0].split('')
-        folders = '/'.join(folders)
+        folders = '/'.join([x for x in re.search(r'[a-z]+(?=[0-9])', doc_id)[0]])
         full_url = f'{base_url}{folders}/{doc_id}/{doc_id}.ocr'
-        return full_url
-    
+        try: 
+            return requests.get(full_url).content
+        except:
+            return 
+    # runs self.ocr_content() through each item in results        
     def obtain_ocr_content(self):
-        
-        # create array of ids
-        urls = [self.ocr_url(doc.id) for doc in self.results]
-        
-        # with tempfile.TemporaryDirectory() as temp_dir:
-        
-        
-    
-        
-        
-        
-        
-        
-            
-        
-    
+        for i, doc in enumerate(self.results):
+            doc['ocr_content'] = self.ocr_content(doc['id'])
+            print(f'{i}/{len(self.results)}')
         
