@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "juul-document-analysis"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.32.3"
+polars = "^1.7.1"
+plotly = "^5.24.1"
+pandas = "^2.2.2"
+pyarrow = "^17.0.0"
+nbformat = "^5.10.4"
+matplotlib = "^3.9.2"
+networkx = "^3.3"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
