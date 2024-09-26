@@ -1,9 +1,14 @@
-from typing import Dict, List
+from typing import Optional, Dict, List, Tuple
 import polars as pl
 import re
 
-def extract_emails(df: pl.DataFrame, columns: List[str]) -> List[Dict[str, str]]:
+def extract_emails(df: pl.DataFrame, columns: List[str], include_domains: Optional[List[str]] = None, exclude_domains: Optional[List[str]] = None) -> List[Dict[str, str]]:
     """Function to clean and extract author names and email addresses"""
+    if include_domains:
+        assert not exclude_domains
+    else:
+        assert not include_domains
+        exclude_domains = [] if not exclude_domains else exclude_domains
     extracted = []
     for c in columns:
         emails = [x[0] for x in df.select(c).rows()]
@@ -18,6 +23,12 @@ def extract_emails(df: pl.DataFrame, columns: List[str]) -> List[Dict[str, str]]
                 for name, email_addr in matches:
                     name = name.strip().strip('"')  # Clean up extra quotes and spaces
                     email_addr = email_addr.strip()
-                    if any(domain in email_addr for domain in ['juul.com', 'pax.com', 'ploom.com', 'juullabs.com']):
-                        extracted.append({'name': name, 'email': email_addr, 'tag': c})
+                    if include_domains:
+                        if any(domain in email_addr for domain in include_domains):
+                            extracted.append({'name': name, 'email': email_addr, 'tag': c})
+                    else:
+                        if not any(domain in email_addr for domain in exclude_domains):
+                            extracted.append({'name': name, 'email': email_addr, 'tag': c})
+
     return extracted
+

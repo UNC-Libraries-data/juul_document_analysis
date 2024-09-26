@@ -58,13 +58,14 @@ class IndustryDocsSearch:
             print(f'{i}/{len(self.results)}')
     
     # TODO: add functionality for /select/* queries for specific fields
-    def query(self, q='(case:"State of North Carolina" AND collection:"JUUL Labs Collection")', wt='json', cursor_mark='*', sort="id%20asc") -> None:
+    def query(self, q='(case:"State of North Carolina" AND collection:"JUUL Labs Collection")', wt='json', cursor_mark='*', sort="id%20asc", ocr=False) -> None:
         """Queries the UCSF Industry Documents Solr Library for documents"""
         self._loop_results(q=q, wt=wt, cursor_mark=cursor_mark, sort=sort)
-        # print('Adding URLs to query results')
-        # self._create_links()
-        # print('Pulling OCR content from query results')
-        # self._obtain_ocr_content()
+        print('Adding URLs to query results')
+        self._create_links()
+        if ocr:
+            print('Pulling OCR content from query results')
+            self._obtain_ocr_content()
 
     def load(self, filename: str) -> pl.DataFrame:
         """Reads results from a local CSV or JSON"""
