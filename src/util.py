@@ -32,3 +32,7 @@ def extract_emails(df: pl.DataFrame, columns: List[str], include_domains: Option
 
     return extracted
 
+def csv_to_parquet(filepath: str) -> None:
+    """Small utility function to read a CSV and write as Parquet using polars, if needed."""
+    df = pl.read_csv(filepath)
+    df.write_parquet(filepath.replace('.csv', '.parquet'))
