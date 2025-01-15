@@ -4,8 +4,8 @@ Created by [University Libraries at the University of North Carolina at Chapel H
 ## Introductory Tutorials
 * [How to use the Industry Documents API Python Wrapper](/html/JUUL_Retrieve_Documents.html)
 * [Conducting Key word Extract and Named Entity Recognition(NER) on Emails](/html/NER_and_keyword_extraction_Emails.html)
+* [Stitching together Slack messages](/html/JUUL_stitching_slack_messages.html)
 
-## Advancewd Tutorials
+## Advanced Tutorials
+**COMING SOON**
 
-
-## Coming Soon
