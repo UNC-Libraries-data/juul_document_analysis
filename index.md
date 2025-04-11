@@ -1,7 +1,7 @@
 # Text Analysis Resources for JUUL Industry Documents
 Created by [University Libraries at the University of North Carolina at Chapel Hill](http://library.unc.eud/data/) in collaboration with [Industry Documents Library at University of California San Francisco](https://www.industrydocuments.ucsf.edu/). To access the Jupyter Notebooks we use for our tutorials, visit our [GitHub repository](https://github.com/UNC-Libraries-data/juul_document_analysis).
 
-For more information about the JUUL Labs Document Collection for North Carolina, see this this [libguide](https://guides.lib.unc.edu/juul).
+For more information about the JUUL Labs Document Collection for North Carolina, see our [libguide](https://guides.lib.unc.edu/juul).
 
 We have also created a [Zotero library](https://www.zotero.org/groups/5395305/juul_proj_docs/library) with resources for text analysis methodology on similar collections that may serve as background reading for your text analysis project.
 
@@ -16,7 +16,6 @@ We have also created a [Zotero library](https://www.zotero.org/groups/5395305/ju
 * [Working with Audio](/)
 * [Working with Audio-visual material](/)
 * [Working with Slack messages](/html/JUUL_stitching_slack_messages.html)
-
 
 ## Advanced Tutorials
 * [Conducting a Time Series Analysis on Emails](/html/JUUL_Email_Time_Series.html)
