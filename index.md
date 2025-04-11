@@ -9,19 +9,20 @@ We have also created a [Zotero library](https://www.zotero.org/groups/5395305/ju
 * [How to use the Industry Documents Library API Python Wrapper](/html/JUUL_using_python_wrapper.html)
 * [How to create a type-specific dataset](/html/JUUL_create_type_dataset.html)
 
-
 ## Working with Specific Document Types
 * [Working with Emails](/)
 * [Working with Spreadsheets](/)
 * [Working with Documents](/)
 * [Working with Audio](/)
 * [Working with Audio-visual material](/)
+* [Working with Slack messages](/html/JUUL_stitching_slack_messages.html)
+
 
 ## Advanced Tutorials
 * [Conducting a Time Series Analysis on Emails](/html/JUUL_Email_Time_Series.html)
 * [Conducting Key word Extract and Named Entity Recognition(NER) on Emails](/html/JUUL_NER_and_keyword_extraction_Emails.html)
-* [Stitching together Slack messages](/html/JUUL_stitching_slack_messages.html)
 * [Creating a RAG Model with Email Documents](/JUUL_rag_model.ipynb)
 
 **MORE COMING SOON**
 
+For questions about these tutorials or about conducting your own text analysis research using the JUUL Labs Documents Collection for North Carolina, please contact [Rolando Rodriguez](mailto:rolando@ad.unc.edu) 
