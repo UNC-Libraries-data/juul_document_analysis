@@ -23,6 +23,6 @@ We have also created a [Zotero library](https://www.zotero.org/groups/5395305/ju
 * [Conducting Key word Extract and Named Entity Recognition(NER) on Emails](/html/JUUL_NER_and_keyword_extraction_Emails.html)
 * [Creating a RAG Model with Email Documents](/JUUL_rag_model.ipynb)
 
-**MORE COMING SOON**
+**MORE TUTORIALS COMING SOON**
 
 For questions about these tutorials or about conducting your own text analysis research using the JUUL Labs Documents Collection for North Carolina, please contact [Rolando Rodriguez](mailto:rolando@ad.unc.edu) 
