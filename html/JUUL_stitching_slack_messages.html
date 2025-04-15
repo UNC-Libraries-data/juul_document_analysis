@@ -7516,7 +7516,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Stitch-Slack-Messages">Stitch Slack Messages<a class="anchor-link" href="#Stitch-Slack-Messages">¶</a></h1><p>This notebook demonstrates how to use the <code>IndustryDocsSearch</code> wrapper to query documents, process OCR content from a zip file, filter messages, and stitch conversations into a formatted text file.</p>
+<h1 id="Stitch-Slack-Messages">Stitch Slack Messages<a class="anchor-link" href="#Stitch-Slack-Messages">¶</a></h1><p><font size="4">This notebook demonstrates how to use the <code>IndustryDocsSearch</code> wrapper to query documents, process OCR content from a zip file, filter messages, and stitch conversations into a formatted text file.</font></p>
 <img alt="No description has been provided for this image" src="assets/slack_message_screenshot.png" width="900"/>
 </div>
 </div>
@@ -7545,7 +7545,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Query-Metadata-Using-IndustryDocsSearch">Query Metadata Using IndustryDocsSearch<a class="anchor-link" href="#Query-Metadata-Using-IndustryDocsSearch">¶</a></h2><p>We're going to query the database using the Python wrapper for the UCSF Industry Documents API. The result of the query will provide the metadata, including document IDs, required to pull OCR text from the downloaded zip file.</p>
+<h2 id="Query-Metadata-Using-IndustryDocsSearch">Query Metadata Using IndustryDocsSearch<a class="anchor-link" href="#Query-Metadata-Using-IndustryDocsSearch">¶</a></h2><p><font size="4">We're going to query the database using the Python wrapper for the UCSF Industry Documents API. The result of the query will provide the metadata, including document IDs, required to identify what item content to join later on.</font></p>
 </div>
 </div>
 </div>
@@ -7685,7 +7685,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Get-OCR-Content-from-the-'Unknown'-item-type-dataset">Get OCR Content from the 'Unknown' item type dataset<a class="anchor-link" href="#Get-OCR-Content-from-the-'Unknown'-item-type-dataset">¶</a></h2><p>Now, we will extract the OCR content for the queried documents using the IDs retrieved in the previous step.</p>
+<h2 id="Get-OCR-Content-from-the-'Unknown'-item-type-dataset">Get OCR Content from the 'Unknown' item type dataset<a class="anchor-link" href="#Get-OCR-Content-from-the-'Unknown'-item-type-dataset">¶</a></h2><p><font size="4">Now, we will extract the OCR content for the queried documents using the IDs retrieved in the previous step.</font></p>
 </div>
 </div>
 </div>
@@ -7725,7 +7725,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Let's double check that all the messages belong to the same 'GLPVD9GQP' box for good measure.</p>
+<p><font size="4">Let's double check that all the messages belong to the same 'GLPVD9GQP' box for good measure.</font></p>
 </div>
 </div>
 </div>
@@ -7769,7 +7769,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Sort-and-Filter-the-Extracted-Data">Sort and Filter the Extracted Data<a class="anchor-link" href="#Sort-and-Filter-the-Extracted-Data">¶</a></h2><p>We will now sort the documents by their bates value and filter for the ones in the "Direct Messages" file path.</p>
+<h2 id="Sort-and-Filter-the-Extracted-Data">Sort and Filter the Extracted Data<a class="anchor-link" href="#Sort-and-Filter-the-Extracted-Data">¶</a></h2><p><font size="4">We will now sort the documents by their bates value, as that will give us the correct message order</font></p>
 </div>
 </div>
 </div>
@@ -7828,7 +7828,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Stitch-Conversations">Stitch Conversations<a class="anchor-link" href="#Stitch-Conversations">¶</a></h2><p>Here, we will format the extracted messages into a conversational format. We will also clean the content to remove confidential information and unnecessary metadata.</p>
+<h2 id="Stitch-Conversations">Stitch Conversations<a class="anchor-link" href="#Stitch-Conversations">¶</a></h2><p><font size="4">Now we will format the extracted messages into a conversational format. We will also clean the content to remove confidential information and unnecessary metadata.</font></p>
 </div>
 </div>
 </div>
@@ -7917,7 +7917,7 @@ Sun Jul 21 17:00:00 PDT 2019 -- Deborah Tham -- Under GDPR if we employ a fully 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Save-the-Conversation-to-a-Text-File">Save the Conversation to a Text File<a class="anchor-link" href="#Save-the-Conversation-to-a-Text-File">¶</a></h2><p>Finally, we save the stitched conversation into a text file for further analysis or archiving.</p>
+<h2 id="Save-the-Conversation-to-a-Text-File">Save the Conversation to a Text File<a class="anchor-link" href="#Save-the-Conversation-to-a-Text-File">¶</a></h2><p><font size="4">Finally, we save the stitched conversation into a text file for further analysis or archiving.</font></p>
 </div>
 </div>
 </div>

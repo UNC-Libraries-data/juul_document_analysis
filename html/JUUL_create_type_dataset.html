@@ -7527,7 +7527,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>In this tutorial, we will walk through how to create a dataset of all documents of a particular type from the UNC case within the JUUL Labs Collection. This workflow can be adjusted to work with other document types, documents from other cases, or documents from other collections from the Industry Documents Library.</p>
+<p><font size="4">In this tutorial, we will walk through how to create a dataset of all documents of a particular type from the UNC case within the JUUL Labs Collection. This workflow can be adjusted to work with other document types, documents from other cases, or documents from other collections from the Industry Documents Library.</font></p>
 <p>The driving reason for this tutorial is that the <a href="https://ucsf.app.box.com/v/IDL-DataSets/folder/78644252849">zipped folder for the JUUL Labs Collection</a> is almost 32 gigabytes alone, and much larger if you unzip the folder! This can take up a lot of space on your computer, especially if you're also creating derivative datasets.</p>
 <p>We recommend downloading the zipped folder and running this code in a virtual machine or cloud computing environment, then downloading the created dataset to your own computer for processing. If you can do all of your analysis in a virtual environment, all the better!</p>
 </div>
@@ -7560,9 +7560,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ol>
-<li>We'll specify our zipped folder's path and where we want to save our created file.</li>
-</ol>
+<p><font size="4">First, We'll specify our zipped folder's path and where we want to save our created file.</font></p>
 </div>
 </div>
 </div>
@@ -7579,6 +7577,79 @@ a.anchor-link {
 <span class="n">last_num</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><font size="4"><code>process_file</code> takes a zipped CSV and filters out the rows that pertain to the North Carolina vs JUUL Labs case and are emails. You can change which document type the function filters out. The different document types are:</font></p>
+<ul>
+<li>email</li>
+<li>document</li>
+<li>unknown</li>
+<li>html</li>
+<li>spreadsheet</li>
+<li>image</li>
+<li>text</li>
+<li>calendar</li>
+<li>presentation</li>
+<li>other</li>
+<li>video</li>
+<li>audio
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process_file</span><span class="p">(</span><span class="n">zip_dir</span><span class="p">,</span> <span class="n">save_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">lock</span><span class="p">,</span> <span class="n">main_df_dict</span><span class="p">):</span>
+    <span class="c1"># Only process CSV files</span>
+    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'.csv'</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_dir</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">zipf</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">zipf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># filters for 'State of North Carolina' and 'email' (this can be adjusted for your project)</span>
+                    <span class="n">temp_df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s1">'|'</span><span class="p">)</span>\
+                        <span class="o">.</span><span class="n">filter</span><span class="p">((</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">'case'</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">'State of North Carolina'</span><span class="p">)),</span>
+                                <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">'type'</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">'email'</span><span class="p">)))</span> <span class="c1"># you can change this document type depending on your research</span>
+
+                    <span class="k">if</span> <span class="n">temp_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">with</span> <span class="n">lock</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="s1">'df'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">main_df_dict</span><span class="p">:</span>
+                                <span class="n">main_df_dict</span><span class="p">[</span><span class="s1">'df'</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_df</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">main_df_dict</span><span class="p">[</span><span class="s1">'df'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">main_df_dict</span><span class="p">[</span><span class="s1">'df'</span><span class="p">],</span> <span class="n">temp_df</span><span class="p">])</span>
+                        <span class="k">return</span> <span class="sa">f</span><span class="s1">'Successfully processed file and added to main dataframe'</span>
+                    <span class="k">return</span> <span class="sa">f</span><span class="s1">'Empty result for file'</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="sa">f</span><span class="s1">'Error processing file: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">'Skipped non-CSV file'</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><font size="4">The function below runs the previous function with four workers, so the jobs occur parallel. This makes the process of filtering through a couple thousand CSVs quite a bit faster.</font></p>
+<p>Lastly, it saves the combined dataframe as a parquet file.</p>
 </div>
 </div>
 </div>
@@ -7625,43 +7696,6 @@ a.anchor-link {
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saved combined dataframe with </span><span class="si">{</span><span class="n">main_df_dict</span><span class="p">[</span><span class="s1">'df'</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> rows to </span><span class="si">{</span><span class="n">output_file</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">"No data was found to save"</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Completed processing </span><span class="si">{</span><span class="n">total_files</span><span class="si">}</span><span class="s2"> files starting from index </span><span class="si">{</span><span class="n">start_index</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process_file</span><span class="p">(</span><span class="n">zip_dir</span><span class="p">,</span> <span class="n">save_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">lock</span><span class="p">,</span> <span class="n">main_df_dict</span><span class="p">):</span>
-    <span class="c1"># Only process CSV files</span>
-    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'.csv'</span><span class="p">):</span>
-        <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_dir</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">zipf</span><span class="p">:</span>
-            <span class="k">with</span> <span class="n">zipf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="c1"># filters for 'State of North Carolina' and 'email' (this can be adjusted for your project)</span>
-                    <span class="n">temp_df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s1">'|'</span><span class="p">)</span>\
-                        <span class="o">.</span><span class="n">filter</span><span class="p">((</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">'case'</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">'State of North Carolina'</span><span class="p">)),</span>
-                                <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">'type'</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">'email'</span><span class="p">)))</span>
-
-                    <span class="k">if</span> <span class="n">temp_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="k">with</span> <span class="n">lock</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="s1">'df'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">main_df_dict</span><span class="p">:</span>
-                                <span class="n">main_df_dict</span><span class="p">[</span><span class="s1">'df'</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_df</span>
-                            <span class="k">else</span><span class="p">:</span>
-                                <span class="n">main_df_dict</span><span class="p">[</span><span class="s1">'df'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">main_df_dict</span><span class="p">[</span><span class="s1">'df'</span><span class="p">],</span> <span class="n">temp_df</span><span class="p">])</span>
-                        <span class="k">return</span> <span class="sa">f</span><span class="s1">'Successfully processed file and added to main dataframe'</span>
-                    <span class="k">return</span> <span class="sa">f</span><span class="s1">'Empty result for file'</span>
-                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="sa">f</span><span class="s1">'Error processing file: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s1">'Skipped non-CSV file'</span>
 </pre></div>
 </div>
 </div>
@@ -7714,17 +7748,15 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">save_content</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">save_dir</span><span class="p">)</span>
-</pre></div>
-</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><font size="4">Now, let's read the saved parquet file to verify the results
+This is a simple check to see if the file was saved correctly by verifying the number of rows</font></p>
 </div>
 </div>
 </div>
@@ -7736,11 +7768,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Now, let's read the saved parquet file to verify the results</span>
-<span class="c1"># This is a simple check to see if the file was saved correctly by verifying the number of rows</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">'juul_unc_emails.parquet'</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">'juul_unc_emails.parquet'</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of rows: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
