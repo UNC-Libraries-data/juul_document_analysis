@@ -14,7 +14,7 @@ We have also created a [Zotero library](https://www.zotero.org/groups/5395305/ju
 * [Working with Spreadsheets](/)
 * [Working with Documents](/)
 * [Working with Audio](/)
-* [Working with Audio-visual material](/)
+* [Working with Audio-visual material](/html/JUUL_long_vid_transcription.html)
 * [Working with Slack messages](/html/JUUL_stitching_slack_messages.html)
 
 ## Advanced Tutorials
