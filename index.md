@@ -19,6 +19,7 @@ We have also created a [Zotero library](https://www.zotero.org/groups/5395305/ju
 
 ## Advanced Tutorials
 * [Conducting a Time Series Analysis on Emails](/html/JUUL_Email_Time_Series.html)
+* [Conducting Employee Network Analysis](/Jupyter/JUUL_Employee_Network_Analysis.ipynb)
 * [Conducting Key word Extract and Named Entity Recognition(NER) on Emails](/html/JUUL_NER_and_keyword_extraction_Emails.html)
 * [Creating a RAG Model with Email Documents](/JUUL_rag_model.ipynb)
 
