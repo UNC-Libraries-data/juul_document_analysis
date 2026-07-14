@@ -35,3 +35,27 @@ For questions about these tutorials or about conducting your own text analysis r
 Of course, you are welcome to use Pandas yourself if preferred. Any Polars DataFrame output from the utility functions provided here can be converted to pandas with `.to_pandas()`, but given the large size of the full dataset (> 2.4 million records), we recommend polars where possible for efficiency's sake.
 
 To further help simplify conversions, there is a csv_to_parquet helper function available in src/util.py to convert CSV files to Parquet format.
+
+## Changelog
+
+### 2026-07-14
+- **Migrated package manager from Poetry to [uv](https://docs.astral.sh/uv/)** — replaced `pyproject.toml` Poetry format with PEP 621 standard and switched build backend to Hatchling; `poetry.lock` replaced by `uv.lock`. Install dependencies with `uv sync`.
+- **Audited all dependencies** via `uv audit` against the OSV advisory database — no known vulnerabilities found across 113 packages.
+- **Updated dependencies** to latest compatible versions:
+
+| Package | Previous | Updated |
+|---|---|---|
+| `requests` | 2.32.3 | 2.34.2 |
+| `polars` | 1.7.1 | 1.42.1 |
+| `plotly` | 5.24.1 | 6.9.0 |
+| `pandas` | 2.2.2 | 3.0.3 |
+| `pyarrow` | 17.0.0 | 25.0.0 |
+| `matplotlib` | 3.9.2 | 3.11.0 |
+| `networkx` | 3.3 | 3.6.1 |
+| `altair` | 5.4.1 | 6.2.2 |
+| `transformers` | 4.45.1 | 5.13.1 |
+| `torch` | 2.4.1 | 2.13.0 |
+| `adbc-driver-manager` | 1.2.0 | 1.11.0 |
+| `adbc-driver-postgresql` | 1.2.0 | 1.11.0 |
+| `connectorx` | 0.3.3 | 0.4.5 |
+| `ipykernel` | 6.29.5 | 7.3.0 |
