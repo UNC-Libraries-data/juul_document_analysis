@@ -3,7 +3,7 @@ name = "juul-document-analysis"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Your Name", email = "you@example.com"}
+    {name = "Rolando Rodriguez", email = "rolando.rodriguez@unc.edu"}
 ]
 readme = "README.md"
 requires-python = ">=3.12"
@@ -32,3 +32,6 @@ dev = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.uv]
+package = false
